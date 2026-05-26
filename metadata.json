@@ -1,0 +1,6 @@
+{
+  "name": "Clever Study AI",
+  "description": "Transform your raw study materials — PDFs, documents, or text — into structured AI-powered flashcards, quizzes, and summaries in seconds.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

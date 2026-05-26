@@ -1,0 +1,49 @@
+{
+  "entities": {
+    "StudyMaterial": {
+      "title": "Study Material",
+      "description": "A processed educational document with extracted summary, flashcards, and quizzes.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The UID of the user who owns this material" },
+        "title": { "type": "string", "description": "Title of the document/summary" },
+        "originalFileName": { "type": "string" },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "keyPoints": { "type": "array", "items": { "type": "string" } },
+            "mainConcepts": { "type": "array", "items": { "type": "object" } }
+          }
+        },
+        "flashcards": { "type": "array", "items": { "type": "object" } },
+        "quiz": { "type": "array", "items": { "type": "object" } },
+        "createdAt": { "type": "number", "description": "Timestamp" }
+      },
+      "required": ["userId", "title", "createdAt"]
+    },
+    "QuizAttempt": {
+      "title": "Quiz Attempt",
+      "description": "Records a user's attempt on a quiz.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The UID of the user taking the quiz" },
+        "materialId": { "type": "string", "description": "Reference to the StudyMaterial" },
+        "score": { "type": "number", "description": "Score achieved out of total questions" },
+        "totalQuestions": { "type": "number" },
+        "createdAt": { "type": "number", "description": "Timestamp" }
+      },
+      "required": ["userId", "materialId", "score", "totalQuestions", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/studyMaterials/{materialId}": {
+      "schema": "StudyMaterial",
+      "description": "Contains study materials generated from uploaded documents."
+    },
+    "/quizAttempts/{attemptId}": {
+      "schema": "QuizAttempt",
+      "description": "Contains quiz attempt records for users."
+    }
+  }
+}
