@@ -291,6 +291,8 @@ ${safeText}
           console.error("Document processing error async:", error);
           if (error?.code === 1009 || error?.message?.includes('maxFileSize exceeded')) {
             documentTasks.set(taskId, { status: "error", error: "File too large. Maximum size is 50MB." });
+          } else if (error?.status === 503 || error?.message?.includes("experiencing high demand") || error?.message?.includes("503") || (error?.code && error?.code === 503)) {
+            documentTasks.set(taskId, { status: "error", error: "Sistem AI sedang ramai, mohon coba beberapa saat lagi." });
           } else {
             documentTasks.set(taskId, { status: "error", error: error.message || "Failed to process document." });
           }
